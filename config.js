@@ -1,9 +1,10 @@
-import dotenv from 'dotenv'
+const dotenv = require('dotenv')
 
 dotenv.config()
 
-const { port } = process.env
+const { port, DB_URL } = process.env
 
-export default {
+module.exports = {
   port: port,
+  DB_URL: DB_URL,
 }
