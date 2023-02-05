@@ -1,6 +1,28 @@
 <%- include('navparts/navHeader')  %> 
 <%- include('navparts/navbody')  %> 
 <div class="container">
+    <form class="filter" action="/" method="GET">
+        <div class="row">
+            <div class="col col-md-10">
+                <select name="category" class="form-control">
+                    <option value="all">All</option>
+                    <option value="clothes">Clothes</option>
+                    <option value="phones">Phones</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+            </div>
+            <div class="col col-md-2">
+                <input type="submit" class="btn btn-primary" value="Filter">
+            </div>
+        </div>
+    </form>
+    
+    <% if(products.length === 0) { %>
+        <div class="alert alert-danger">
+            there is no products
+        </div>
+        <% } else { %>    
     <div class="row">
         <% for (let i of products) {%> 
         <div class="col col-12 col-md-6 col-lg-4 col-xl-3">
@@ -22,5 +44,6 @@
         </div>
         <% } %> 
     </div>
+    <% } %>
 </div>
 <%- include('navparts/navFooter')  %> 
