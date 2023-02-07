@@ -22,6 +22,7 @@ exports.getAllProducts = () => {
         resolve(products)
       })
       .catch((err) => {
+        mongoose.disconnect()
         console.log(err)
         reject(err)
       })
@@ -42,6 +43,7 @@ exports.filterByCategory = (category) => {
         resolve(products)
       })
       .catch((err) => {
+        mongoose.disconnect()
         console.log(err)
         reject(err)
       })
@@ -62,6 +64,7 @@ exports.getProductDtails = (productId) => {
       })
       .catch((err) => {
         console.log(err)
+        mongoose.disconnect()
         reject(err)
       })
   })
@@ -80,6 +83,7 @@ exports.getOne = () => {
         resolve(product)
       })
       .catch((err) => {
+        mongoose.disconnect()
         console.log(err)
         reject(err)
       })

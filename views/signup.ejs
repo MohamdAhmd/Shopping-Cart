@@ -1,0 +1,50 @@
+<%- include('navparts/navHeader')  %> 
+<%- include('navparts/navbody')  %> 
+<form class="unique login" method="post" action="/signup">
+        <h2 class="h2">Sign up</h2> 
+<%# ------------------------------------ USER NAME --------------------------------------------------- %> 
+    <label for="username" class="label">User Name</label> 
+    <input type="text" name="username" class="input"> 
+    <div class="email error">
+        <% let usernameError = validationError.find(err => err.param === 'username') %>
+        <% if (usernameError) { %>
+                <%= usernameError.msg %>
+            <% } %>
+    </div>
+<%# ------------------------------------ EMAIL --------------------------------------------------- %> 
+    <label for="email" class="label">Email</label>
+    <input type="text" name="email" class="input">
+    <div class="email error">
+        <% let emailError = validationError.find(err => err.param === 'email') %>
+        <% if (emailError) { %>
+                <%= emailError.msg %>
+            <% } %>
+    </div>
+<%# ------------------------------------ PASSWORD --------------------------------------------------- %> 
+    <label for="password" class="label">Password</label>
+    <input type="password" name="password" class="input">
+    
+    <div class="email error">
+        <% let passwordError = validationError.find(err => err.param === 'password') %>
+        <% if (passwordError) { %>
+                <%= passwordError.msg %>
+            <% } %>
+    </div>
+<%# ------------------------------------ CONFIRM PASSWORD --------------------------------------------------- %> 
+<label for="confirmpassword" class="label">Confirm Password</label>
+<input type="password" name="confirmpassword" class="input">
+<div class="email error">
+    <% let confirmpasswordError = validationError.find(err => err.param === 'confirmpassword') %>
+        <% if (confirmpasswordError) { %>
+                <%= confirmpasswordError.msg %>
+            <% } %>
+        </div>
+<%# ------------------------------------ SIGNUP BUTTON --------------------------------------------------- %> 
+        <button class="button">Sign up</button>
+        <div class="email error"></div>
+        <div>
+            <h6> Already have account ? <a href="/login">Login</a></h6>
+        </div>
+</form>
+<%- include('navparts/navFooter'); -%>
+
