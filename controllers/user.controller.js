@@ -5,12 +5,14 @@ module.exports.get_Login = (req, res) => {
   res.render('login', {
     loginError: req.flash('loginError')[0],
     loginValidError: req.flash('loginValidError'),
+    isUser: false,
   })
 }
 //######################################### GET SIGN UP #######################################################//
 module.exports.get_Signup = (req, res) => {
   res.render('signup', {
     validationError: req.flash('validationError'),
+    isUser: false,
   })
 }
 

@@ -2,10 +2,11 @@ const router = require('express').Router()
 const check = require('express-validator').check
 const bodyParser = require('body-parser')
 const userController = require('../controllers/user.controller')
-
-router.get('/login', userController.get_Login)
+const protectRoute = require('./protectRoutes/userProtect')
+router.get('/login', protectRoute.isNotUser, userController.get_Login)
 router.post(
   '/login',
+  protectRoute.isNotUser,
   bodyParser.urlencoded({ extended: true }),
   check('email')
     .not()
@@ -21,9 +22,10 @@ router.post(
     .withMessage('Password must be at least 6 characters'),
   userController.post_Login
 )
-router.get('/signup', userController.get_Signup)
+router.get('/signup', protectRoute.isNotUser, userController.get_Signup)
 router.post(
   '/signup',
+  protectRoute.isNotUser,
   bodyParser.urlencoded({ extended: true }),
   check('username').not().isEmpty().withMessage('Username is required'),
   check('email')

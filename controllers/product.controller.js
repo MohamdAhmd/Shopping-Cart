@@ -5,6 +5,8 @@ exports.getProductDetails = async (req, res) => {
     const product = await productsModel.getProductDtails(productId)
     res.render('product', {
       product: product,
+      isUser: true,
+      validationErrors: req.flash('validationErrors')[0],
     })
   } catch (err) {
     console.log(err)
