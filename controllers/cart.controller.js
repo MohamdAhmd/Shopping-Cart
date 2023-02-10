@@ -1,6 +1,5 @@
 const cartModel = require('../models/cart.model')
 const validResult = require('express-validator').validationResult
-
 //###########################################################################################################
 //###########################################################################################################
 exports.getCart = (req, res) => {
@@ -10,6 +9,8 @@ exports.getCart = (req, res) => {
       res.render('cart', {
         items: iteams,
         isUser: true,
+        validationErrors: req.flash('validationErrors')[0],
+        userId: req.session.userId,
       })
     })
     .catch((err) => console.log(err))
@@ -20,14 +21,17 @@ exports.getCart = (req, res) => {
 exports.postCart = (req, res) => {
   if (validResult(req).isEmpty()) {
     cartModel
-      .addNewItem({
-        name: req.body.name,
-        price: req.body.price,
-        amount: req.body.amount,
-        productId: req.body.productId,
-        userId: req.session.userId,
-        timestamp: Date.now(),
-      })
+      .addNewItem(
+        {
+          name: req.body.name,
+          price: req.body.price,
+          amount: req.body.amount,
+          productId: req.body.productId,
+          userId: req.session.userId,
+          timestamp: Date.now(),
+        },
+        req.body.productId
+      )
       .then(() => {
         res.redirect('/cart')
       })
@@ -69,6 +73,14 @@ exports.saveCart = (req, res) => {
 exports.deleteCart = (req, res) => {
   cartModel
     .deleteCart(req.body.cartId)
+    .then(() => res.redirect('/cart'))
+    .catch((err) => console.log(err))
+}
+//###########################################################################################################
+//###########################################################################################################
+exports.deleteAllCarts = (req, res) => {
+  cartModel
+    .deleteallCarts()
     .then(() => res.redirect('/cart'))
     .catch((err) => console.log(err))
 }

@@ -10,6 +10,7 @@ const homeRouter = require('./routes/home.route')
 const userRouter = require('./routes/user.route')
 const productRouter = require('./routes/product.route')
 const cartRouter = require('./routes/cart.route')
+const orderRouter = require('./routes/order.route')
 const config = require('./config')
 
 const app = express()
@@ -29,9 +30,9 @@ app.use(
   session({
     secret: 'any thing ghdsavchgvsdhcvhdsvck',
     saveUninitialized: false,
-    cookie: {
-      maxAge: 60 * 60 * 100, // in milliseconds
-    },
+    //cookie: {
+    // maxAge: 60 * 60 * 60 * 100, // in milliseconds
+    //},
     store: STORE,
   })
 )
@@ -42,6 +43,7 @@ app.use(userRouter)
 app.use('/', homeRouter)
 app.use('/product', productRouter)
 app.use('/cart', cartRouter)
+app.use(orderRouter)
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
