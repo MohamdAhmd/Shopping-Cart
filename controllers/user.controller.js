@@ -6,6 +6,7 @@ module.exports.get_Login = (req, res) => {
     loginError: req.flash('loginError')[0],
     loginValidError: req.flash('loginValidError'),
     isUser: false,
+    isAdmin: false,
   })
 }
 //######################################### GET SIGN UP #######################################################//
@@ -13,6 +14,7 @@ module.exports.get_Signup = (req, res) => {
   res.render('signup', {
     validationError: req.flash('validationError'),
     isUser: false,
+    isAdmin: false,
   })
 }
 
@@ -36,8 +38,9 @@ module.exports.post_Signup = (req, res) => {
 module.exports.post_Login = (req, res) => {
   if (validResult(req).isEmpty()) {
     User.login(req.body.email, req.body.password)
-      .then((id) => {
-        req.session.userId = id
+      .then((result) => {
+        req.session.userId = result.id
+        req.session.isAdmin = result.isAdmin
         res.redirect('/')
       })
       .catch((err) => {

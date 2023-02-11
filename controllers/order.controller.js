@@ -8,6 +8,7 @@ exports.orderVerify = (req, res) => {
       res.render('verify-order', {
         cart: cartItem,
         isUser: true,
+        isAdmin: req.session.isAdmin,
         validationError: req.flash('validationErrors')[0],
       })
     })
@@ -15,7 +16,11 @@ exports.orderVerify = (req, res) => {
 }
 exports.getOrders = (req, res) => {
   oredrModel.getOrderByUser(req.session.userId).then((items) => {
-    res.render('orders', { items: items, isUser: true })
+    res.render('orders', {
+      items: items,
+      isUser: true,
+      isAdmin: req.session.isAdmin,
+    })
   })
 }
 
@@ -55,6 +60,7 @@ exports.verifyAllorders = (req, res) => {
       res.render('verify-all-orders', {
         cart: cartItems,
         isUser: true,
+        isAdmin: req.session.isAdmin,
         validationError: req.flash('validationErrors')[0],
       })
     })
