@@ -9,6 +9,7 @@ exports.addProduct = (req, res) => {
     isUser: true,
     validationErrors: req.flash('validationErrors'),
     productAdded: req.flash('productadd')[0],
+    pageTitle: 'Add Product',
   })
 }
 exports.postAddProduct = (req, res) => {
@@ -20,7 +21,10 @@ exports.postAddProduct = (req, res) => {
         req.flash('productadd', true)
         res.redirect('/admin/add')
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err)
+        res.redirect('/error')
+      })
   } else {
     req.flash('validationErrors', validationResult(req).array())
     res.redirect('/admin/add')
@@ -35,9 +39,13 @@ exports.getOrders = (req, res) => {
         isAdmin: true,
         items: items,
         email: req.session.email,
+        pageTitle: 'Manage Orders',
       })
     })
-    .catch((err) => console.log(err))
+    .catch((err) => {
+      res.redirect('/error')
+      console.log(err)
+    })
 }
 
 exports.postOrders = (req, res) => {
@@ -46,5 +54,6 @@ exports.postOrders = (req, res) => {
     .then(() => res.redirect('/admin/orders'))
     .catch((err) => {
       console.log(err)
+      res.redirect('/error')
     })
 }

@@ -47,6 +47,33 @@ app.use('/cart', cartRouter)
 app.use(orderRouter)
 app.use('/admin', adminRouter)
 
+app.get('/error', (req, res) => {
+  res.status(500)
+  res.render('error.ejs', {
+    isUser: req.session.userId,
+    isAdmin: req.session.isAdmin,
+    pageTitle: 'Error',
+  })
+})
+
+app.get('/not-admin', (req, res) => {
+  res.status(403)
+  res.render('not-admin', {
+    isUser: req.session.userId,
+    isAdmin: false,
+    pageTitle: 'Not Allowed',
+  })
+})
+
+app.use((req, res) => {
+  res.status(404)
+  res.render('not-found', {
+    isUser: req.session.userId,
+    isAdmin: req.session.isAdmin,
+    pageTitle: 'Page Not Found',
+  })
+})
+
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`)

@@ -14,9 +14,11 @@ exports.getHome = (req, res) => {
         isUser: req.session.userId,
         isAdmin: req.session.isAdmin,
         validationErrors: req.flash('validationErrors')[0],
+        pageTitle: 'Home',
       })
     })
     .catch((err) => {
       console.log(err)
+      res.redirect('/error')
     })
 }

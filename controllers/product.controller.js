@@ -8,11 +8,14 @@ exports.getProductDetails = async (req, res) => {
       isUser: true,
       isAdmin: req.session.isAdmin,
       validationErrors: req.flash('validationErrors')[0],
+      pageTitle: 'Product Details',
     })
   } catch (err) {
     console.log(err)
+    res.redirect('/error')
   }
 }
+
 exports.getProduct = async (req, res) => {
   try {
     const product = await productsModel.getOne()
@@ -20,8 +23,10 @@ exports.getProduct = async (req, res) => {
       product: product,
       isAdmin: req.session.isAdmin,
       isUser: true,
+      pageTitle: product.name,
     })
   } catch (err) {
+    res.redirect('/error')
     console.log(err)
   }
 }

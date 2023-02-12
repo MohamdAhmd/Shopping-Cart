@@ -7,6 +7,7 @@ module.exports.get_Login = (req, res) => {
     loginValidError: req.flash('loginValidError'),
     isUser: false,
     isAdmin: false,
+    pageTitle: 'Login',
   })
 }
 //######################################### GET SIGN UP #######################################################//
@@ -15,6 +16,7 @@ module.exports.get_Signup = (req, res) => {
     validationError: req.flash('validationError'),
     isUser: false,
     isAdmin: false,
+    pageTitle: 'Signup',
   })
 }
 
