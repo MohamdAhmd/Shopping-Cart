@@ -116,3 +116,38 @@ exports.orderAll = (data) => {
       })
   })
 }
+
+exports.getAllOrder = () => {
+  return new Promise((resolve, reject) => {
+    mongoose
+      .connect(config.DB_URL)
+      .then(() => {
+        return Order.find({}, {}, { sort: { timestamp: -1 } }).then((items) => {
+          mongoose.disconnect()
+          resolve(items)
+        })
+      })
+      .catch((err) => {
+        mongoose.disconnect()
+        reject(err)
+      })
+  })
+}
+
+exports.editOrder = (id, newStatus) => {
+  return new Promise((resolve, reject) => {
+    mongoose
+      .connect(config.DB_URL)
+      .then(() => {
+        return Order.updateOne({ _id: id }, { status: newStatus })
+      })
+      .then((items) => {
+        mongoose.disconnect()
+        resolve(items)
+      })
+      .catch((err) => {
+        mongoose.disconnect()
+        reject(err)
+      })
+  })
+}

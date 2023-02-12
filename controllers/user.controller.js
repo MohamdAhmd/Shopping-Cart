@@ -40,6 +40,7 @@ module.exports.post_Login = (req, res) => {
     User.login(req.body.email, req.body.password)
       .then((result) => {
         req.session.userId = result.id
+        req.session.email = result.email
         req.session.isAdmin = result.isAdmin
         res.redirect('/')
       })

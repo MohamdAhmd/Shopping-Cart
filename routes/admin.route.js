@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const check = require('express-validator').check
 const protectRoute = require('./protectRoutes/adminProtect')
-//const bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 const multer = require('multer')
 
 const adminController = require('../controllers/admin.controller')
@@ -34,6 +34,15 @@ router.post(
     else throw 'image is required'
   }),
   adminController.postAddProduct
+)
+
+router.get('/orders', protectRoute.isAdmin, adminController.getOrders)
+
+router.post(
+  '/orders',
+  protectRoute.isAdmin,
+  bodyParser.urlencoded({ extended: true }),
+  adminController.postOrders
 )
 
 module.exports = router

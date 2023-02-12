@@ -30,16 +30,14 @@
                             <a class="nav-link" href="/admin/add">Add product</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin/order">Manage order</a>
+                            <a class="nav-link" href="/admin/orders">Manage order</a>
                         </li>
                     </ul> 
                     <% } %>
-                    <% if (isUser) { %> 
-                    <form action="/logout" method="post">
-                        <button class="btn btn-danger">Logout</button>
-                    </form> 
-                    <% } %> 
                 </div>
             </div>
+            <form action="/logout" method="post">
+                <button class="btn btn-danger">Logout</button>
+            </form> 
         </div>
         </nav>
