@@ -12,9 +12,13 @@ exports.getCart = (req, res) => {
         isAdmin: req.session.isAdmin,
         validationErrors: req.flash('validationErrors')[0],
         userId: req.session.userId,
+        pageTitle: 'Cart',
       })
     })
-    .catch((err) => console.log(err))
+    .catch((err) => {
+      res.redirect('/error')
+      console.log(err)
+    })
 }
 //###########################################################################################################
 //###########################################################################################################
@@ -38,6 +42,7 @@ exports.postCart = (req, res) => {
       })
       .catch((err) => {
         console.log(err)
+        res.redirect('/error')
       })
   } else {
     req.flash('validationErrors', validResult(req).array())
@@ -63,6 +68,7 @@ exports.saveCart = (req, res) => {
       })
       .catch((err) => {
         console.log(err)
+        res.redirect('/error')
       })
   } else {
     req.flash('validationErrors', validResult(req).array())
@@ -75,7 +81,10 @@ exports.deleteCart = (req, res) => {
   cartModel
     .deleteCart(req.body.cartId)
     .then(() => res.redirect('/cart'))
-    .catch((err) => console.log(err))
+    .catch((err) => {
+      res.redirect('/error')
+      console.log(err)
+    })
 }
 //###########################################################################################################
 //###########################################################################################################
@@ -83,5 +92,8 @@ exports.deleteAllCarts = (req, res) => {
   cartModel
     .deleteallCarts()
     .then(() => res.redirect('/cart'))
-    .catch((err) => console.log(err))
+    .catch((err) => {
+      res.redirect('/error')
+      console.log(err)
+    })
 }

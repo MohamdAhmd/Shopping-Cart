@@ -10,9 +10,13 @@ exports.orderVerify = (req, res) => {
         isUser: true,
         isAdmin: req.session.isAdmin,
         validationError: req.flash('validationErrors')[0],
+        pageTitle: 'Verify Order',
       })
     })
-    .catch((err) => console.log(err))
+    .catch((err) => {
+      res.redirect('/error')
+      console.log(err)
+    })
 }
 exports.getOrders = (req, res) => {
   oredrModel.getOrderByUser(req.session.userId).then((items) => {
@@ -20,6 +24,7 @@ exports.getOrders = (req, res) => {
       items: items,
       isUser: true,
       isAdmin: req.session.isAdmin,
+      pageTitle: 'Orders',
     })
   })
 }
@@ -29,7 +34,10 @@ exports.addOrder = (req, res) => {
     oredrModel
       .addNewOrder(req.body)
       .then(() => res.redirect('orders'))
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        res.redirect('/error')
+        console.log(err)
+      })
   } else {
     req.flash('validationErrors', validResult(req).array())
     res.redirect('/verify-order?order=' + req.body.cartId)
@@ -42,7 +50,10 @@ exports.cancelOrder = (req, res) => {
     .then(() => {
       res.redirect('/orders')
     })
-    .catch((err) => console.log(err))
+    .catch((err) => {
+      res.redirect('/error')
+      console.log(err)
+    })
 }
 exports.cancelAllOrders = (req, res) => {
   oredrModel
@@ -50,7 +61,10 @@ exports.cancelAllOrders = (req, res) => {
     .then(() => {
       res.redirect('/orders')
     })
-    .catch((err) => console.log(err))
+    .catch((err) => {
+      res.redirect('/error')
+      console.log(err)
+    })
 }
 
 exports.verifyAllorders = (req, res) => {
@@ -64,5 +78,8 @@ exports.verifyAllorders = (req, res) => {
         validationError: req.flash('validationErrors')[0],
       })
     })
-    .catch((err) => console.log(err))
+    .catch((err) => {
+      res.redirect('/error')
+      console.log(err)
+    })
 }
