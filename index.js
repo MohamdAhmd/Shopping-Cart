@@ -11,6 +11,7 @@ const userRouter = require('./routes/user.route')
 const productRouter = require('./routes/product.route')
 const cartRouter = require('./routes/cart.route')
 const orderRouter = require('./routes/order.route')
+const adminRouter = require('./routes/admin.route')
 const config = require('./config')
 
 const app = express()
@@ -44,6 +45,7 @@ app.use('/', homeRouter)
 app.use('/product', productRouter)
 app.use('/cart', cartRouter)
 app.use(orderRouter)
+app.use('/admin', adminRouter)
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {

@@ -17,14 +17,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
 })
 
-/*
-const hashPassword = (password: string) => {
-  const salt = parseInt(config.SALT_PASSWORD as string, 10)
-  return bcrypt.hashSync(`${password}${config.BEPPER_PASSWORD}`, salt)
-}
-*/
 exports.register = (username, email, password) => {
   return new Promise((resolve, reject) => {
     mongoose
@@ -78,7 +76,10 @@ exports.login = (email, password) => {
               reject('Password Incorrect')
             } else {
               mongoose.disconnect()
-              resolve(user._id)
+              resolve({
+                id: user._id,
+                isAdmin: user.isAdmin,
+              })
             }
           })
         }

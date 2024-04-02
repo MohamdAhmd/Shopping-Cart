@@ -24,7 +24,8 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/signup">Signup</a>
                             </li>
-                            <% } %> 
+                            <% } %>
+                    <% if(isAdmin ) {%>
                         <li class="nav-item">
                             <a class="nav-link" href="/admin/add">Add product</a>
                         </li>
@@ -32,9 +33,10 @@
                             <a class="nav-link" href="/admin/order">Manage order</a>
                         </li>
                     </ul> 
+                    <% } %>
                     <% if (isUser) { %> 
                     <form action="/logout" method="post">
-                        <button class="button">Logout</button>
+                        <button class="btn btn-danger">Logout</button>
                     </form> 
                     <% } %> 
                 </div>

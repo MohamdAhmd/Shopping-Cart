@@ -17,7 +17,7 @@ const orderSchema = mongoose.Schema({
   timestamp: Number,
 })
 
-const Order = mongoose.model('rder', orderSchema)
+const Order = mongoose.model('order', orderSchema)
 
 exports.addNewOrder = (data) => {
   return new Promise((resolve, reject) => {

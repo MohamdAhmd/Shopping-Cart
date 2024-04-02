@@ -9,6 +9,7 @@ exports.getCart = (req, res) => {
       res.render('cart', {
         items: iteams,
         isUser: true,
+        isAdmin: req.session.isAdmin,
         validationErrors: req.flash('validationErrors')[0],
         userId: req.session.userId,
       })

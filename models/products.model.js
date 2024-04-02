@@ -8,7 +8,26 @@ const productSchema = mongoose.Schema({
   description: String,
   category: String,
 })
-
+exports.addNewProduct = (data) => {
+  return new Promise((resolve, reject) => {
+    mongoose
+      .connect(config.DB_URL)
+      .then(() => {
+        const newProduct = new product(data)
+        return newProduct.save()
+      })
+      .then((products) => {
+        mongoose.disconnect()
+        resolve(products)
+      })
+      .catch((err) => {
+        mongoose.disconnect()
+        reject(err)
+      })
+  })
+}
+//########################################################################
+//########################################################################
 exports.getAllProducts = () => {
   return new Promise((resolve, reject) => {
     mongoose
