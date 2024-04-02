@@ -32,6 +32,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "build":"npm install",
+    "start":"node index.js",
     "dev": "nodemon index.js",
     "format": "prettier --write **/*.js",
     "lint": "eslint **/*.js",

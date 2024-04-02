@@ -40,12 +40,12 @@ app.use(
 app.set('views', 'views')
 app.set('view engine', 'ejs')
 
-app.use(userRouter)
 app.use('/', homeRouter)
+app.use('/', userRouter)
 app.use('/product', productRouter)
 app.use('/cart', cartRouter)
-app.use(orderRouter)
 app.use('/admin', adminRouter)
+app.use('/', orderRouter)
 
 app.get('/error', (req, res) => {
   res.status(500)
