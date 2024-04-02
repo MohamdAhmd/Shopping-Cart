@@ -9,6 +9,7 @@ const flash = require('connect-flash')
 const homeRouter = require('./routes/home.route')
 const userRouter = require('./routes/user.route')
 const productRouter = require('./routes/product.route')
+const cartRouter = require('./routes/cart.route')
 const config = require('./config')
 
 const app = express()
@@ -40,6 +41,7 @@ app.set('view engine', 'ejs')
 app.use(userRouter)
 app.use('/', homeRouter)
 app.use('/product', productRouter)
+app.use('/cart', cartRouter)
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {

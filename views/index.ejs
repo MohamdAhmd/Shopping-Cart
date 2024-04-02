@@ -18,6 +18,13 @@
         </div>
     </form>
     
+    <div class="email error">
+        <% if(validationErrors) { %>
+            <%= validationErrors.msg%>
+    <% } %>
+    </div>
+    
+
     <% if(products.length === 0) { %>
         <div class="alert alert-danger">
             there is no products
@@ -34,10 +41,14 @@
                         <a href="/product/<%= i._id%>" ><%= i.name%></a>
                     </h5>
                     <p>Price:<%= i.price%> $</p>
+                    
                     <form action="/cart" method="post">
-                        <input type="number" name="amount" class="form-control">
+                        <input type="test" name="amount" class="form-control" placeholder="Amount ">
+                        <input type="hidden" name="name" value="<%= i.name%>">
+                        <input type="hidden" name="price" value="<%= i.price%>">
+                        <input type="hidden" name="productId" value="<%= i._id%>">
+                        <input type="hidden" name="redirectTo" value="/">
                         <input type="submit" value="Add to Cart" class="btn btn-primary ">
-
                     </form>
                 </div>
             </div>

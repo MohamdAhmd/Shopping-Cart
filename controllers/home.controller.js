@@ -1,4 +1,5 @@
 const productsModel = require('../models/products.model')
+
 exports.getHome = (req, res) => {
   const category = req.query.category
   const validCategories = ['clothes', 'phones', 'electronics', 'accessories']
@@ -10,6 +11,8 @@ exports.getHome = (req, res) => {
     .then((products) => {
       res.render('index', {
         products: products,
+        isUser: req.session.userId,
+        validationErrors: req.flash('validationErrors')[0],
       })
     })
     .catch((err) => {
