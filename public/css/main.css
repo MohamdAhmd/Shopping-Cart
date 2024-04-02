@@ -112,3 +112,15 @@ form .h2{
   padding: 10px 16px;
   letter-spacing: 2px;
 }
+
+.cartForm{
+  margin-top: 10px;
+  border-radius: 36px;
+  border:0;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.8em;
+  display: block;
+  padding: 10px 16px;
+  letter-spacing: 2px;
+}

@@ -36,5 +36,11 @@ router.post(
   bodyParser.urlencoded({ extended: true }),
   cartController.deleteCart
 )
+router.post(
+  '/cancelall',
+  protectRoute.isUser,
+  bodyParser.urlencoded({ extended: true }),
+  cartController.deleteAllCarts
+)
 
 module.exports = router
