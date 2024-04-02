@@ -78,11 +78,30 @@ exports.login = (email, password) => {
               mongoose.disconnect()
               resolve({
                 id: user._id,
+                email: user.email,
                 isAdmin: user.isAdmin,
               })
             }
           })
         }
+      })
+      .catch((err) => {
+        mongoose.disconnect()
+        reject(err)
+      })
+  })
+}
+
+exports.getUserbyEmail = (email) => {
+  return new Promise((resolve, reject) => {
+    mongoose
+      .connect(config.DB_URL)
+      .then(() => {
+        return User.findOne({ email: email })
+      })
+      .then((user) => {
+        mongoose.disconnect()
+        resolve(user)
       })
       .catch((err) => {
         mongoose.disconnect()

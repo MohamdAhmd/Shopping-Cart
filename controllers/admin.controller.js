@@ -1,4 +1,6 @@
 const productsModel = require('../models/products.model')
+const ordersModel = require('../models/order.model')
+//const User = require('../models/user.model')
 const validationResult = require('express-validator').validationResult
 
 exports.addProduct = (req, res) => {
@@ -23,4 +25,26 @@ exports.postAddProduct = (req, res) => {
     req.flash('validationErrors', validationResult(req).array())
     res.redirect('/admin/add')
   }
+}
+exports.getOrders = (req, res) => {
+  ordersModel
+    .getAllOrder()
+    .then((items) => {
+      res.render('manage-orders', {
+        isUser: true,
+        isAdmin: true,
+        items: items,
+        email: req.session.email,
+      })
+    })
+    .catch((err) => console.log(err))
+}
+
+exports.postOrders = (req, res) => {
+  ordersModel
+    .editOrder(req.body.orderId, req.body.status)
+    .then(() => res.redirect('/admin/orders'))
+    .catch((err) => {
+      console.log(err)
+    })
 }
